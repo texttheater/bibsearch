@@ -143,3 +143,13 @@ You can use the following in your `Makefile`, for example:
 
 This generates whatever bib file is referenced in PAPER.tex.
 
+## Incorporate in a `latexmk` workflow
+
+If you are using `latexmk`, add the following to your project's `.latexmkrc`.
+
+    add_cus_dep('aux', 'bib', 1, 'aux2bib');
+    sub aux2bib {
+        system( "bibsearch tex \"$_[0]\" -B" );
+    }
+
+As above, this generates a `.bib` file with whatever entry is referenced in the `.tex` file.
